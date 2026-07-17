@@ -11,18 +11,38 @@ const Space = require("./models/spaceSchema");
 connectDB();
 
 const port = process.env.PORT || 5001;
-const front_url = process.env.CLIENT_URL || "http://localhost:3000";
+
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true;
+
+  const allowed = [process.env.CLIENT_URL, "http://localhost:3000"].filter(
+    Boolean
+  );
+  if (allowed.includes(origin)) return true;
+  if (origin.startsWith("https://") && origin.endsWith(".vercel.app")) {
+    return true;
+  }
+
+  return false;
+};
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (isAllowedOrigin(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  cors({
-    origin: front_url,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
-app.options(front_url, cors());
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
@@ -32,9 +52,7 @@ app.use(errorHandler);
 
 const server = http.createServer(app);
 const io = socketio(server, {
-  cors: {
-    origin: front_url,
-  },
+  cors: corsOptions,
 });
 
 const removeActiveUser = async (spaceId, name, email) => {

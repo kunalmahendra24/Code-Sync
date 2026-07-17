@@ -1,11 +1,10 @@
 import { io } from "socket.io-client";
-
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5001";
+import { getApiUrl } from "./utils/apiUrl";
 
 const options = {
   reconnect_attempt: "Infinity",
   autoConnect: false,
-  transports: ["websocket"],
+  transports: ["websocket", "polling"],
 };
 
-export const socket = io(API_URL, options);
+export const socket = io(getApiUrl(), options);
