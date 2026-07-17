@@ -12,28 +12,8 @@ connectDB();
 
 const port = process.env.PORT || 5001;
 
-const isAllowedOrigin = (origin) => {
-  if (!origin) return true;
-
-  const allowed = [process.env.CLIENT_URL, "http://localhost:3000"].filter(
-    Boolean
-  );
-  if (allowed.includes(origin)) return true;
-  if (origin.startsWith("https://") && origin.endsWith(".vercel.app")) {
-    return true;
-  }
-
-  return false;
-};
-
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (isAllowedOrigin(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 };
