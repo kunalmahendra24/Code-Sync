@@ -1,0 +1,7 @@
+Client/node_modules
+Client/build
+Server/node_modules
+Server/.env
+Server/temp
+Client/.env
+.DS_Store

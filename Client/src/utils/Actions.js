@@ -1,0 +1,25 @@
+const ACTIONS = {
+  JOIN: "join",
+  JOINED: "joined",
+  DISCONNECTED: "disconnected",
+  CODE_CHANGE: "code-change",
+  SYNC_CODE: "sync-code",
+  LEAVE: "leave",
+  SPACEDATA_CHANGE: "spaceData-change",
+  LEFT: "left",
+  FILE_METADATA_CHANGE: "file-metadata-change",
+  SYNC_FILE_METADATA: "sync-file-metadata",
+  INTERVIEW_JOIN: "interview-join",
+  INTERVIEW_STATE: "interview-state",
+  INTERVIEW_UPDATE: "interview-update",
+  INTERVIEW_SYNC: "interview-sync",
+  INTERVIEW_KICKED: "interview-kicked",
+  INTERVIEW_PERMISSION_DENIED: "interview-permission-denied",
+  INTERVIEW_QUESTION_UPDATE: "interview-question-update",
+  INTERVIEW_TIMER_TICK: "interview-timer-tick",
+  INTERVIEW_TIMER_SYNC: "interview-timer-sync",
+  INTERVIEW_DELETED: "interview-deleted",
+  CODE_EXECUTION_RESULT: "code-execution-result",
+};
+
+module.exports = ACTIONS;
