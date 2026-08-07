@@ -2,7 +2,6 @@ import React, { useState, useEffect, useReducer, useContext } from "react";
 import {
   Box,
   Button,
-  Grid,
   Tabs,
   Tab,
   Alert,
@@ -189,99 +188,76 @@ function Dashboard() {
 
       <Box
         sx={{
-          position: "fixed",
-          width: "100vw",
-          display: "flex",
-          zIndex: 3,
-          justifyContent: "space-between",
+          minHeight: "100vh",
+          backgroundColor: "background.default",
         }}
       >
         <Box
-                component="img"
-                sx={{
-                  height: "70px",
-                  width: "80px",
-                }}
-                alt="No spaces found"
-                src="/logo1.png"
-              />
-        <Box>
-          <IconButton onClick={colorMode.toggleColorMode}>
-            {theme.palette.mode === "light" ? (
-              <DarkModeIcon sx={{ fontSize: 30 }} />
-            ) : (
-              <LightModeIcon sx={{ fontSize: 30 }} />
-            )}
-          </IconButton>
-          <Button
-            variant="contained"
-            sx={{ m: 3 }}
-            startIcon={<LogoutIcon />}
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
-          <Profile loggedInUser={auth} />
-        </Box>
-      </Box>
-      <Grid
-        container
-        sx={{ minHeight: "100vh", backgroundColor: "background.default" }}
-      >
-        <Grid item xs={12} sx={{ height: "30vh" }}>
-          <Box
-            sx={{
-              height: "10vw",
-              backgroundColor: "background.paper",
-              position: "fixed",
-              display: "absolute",
-              justifyContent: "center",
-              ml:"30px",
-              zIndex: 3,
-            }}
-          >
-            <Box
-              sx={{
-                position: "absolute",
-                bottom: 0,
-                ml: "auto",
-                mr: "auto",
-              }}
-            >
-              <Tabs
-                value={state.value}
-                onChange={(event, value) =>
-                  dispatch({ type: "updateValue", payload: value })
-                }
-              >
-                <Tab
-                  icon={<WorkspacesIcon />}
-                  iconPosition="start"
-                  label="Sessions"
-                  sx={{ pb: 1, pt: 3 }}
-                />
-                <Tab
-                  icon={<VideoCallIcon />}
-                  iconPosition="start"
-                  label="Interviews"
-                  sx={{ pb: 1, pt: 3 }}
-                />
-                <Tab
-                  icon={<SettingsIcon />}
-                  iconPosition="start"
-                  label="Settings"
-                  sx={{ pb: 1, pt: 3 }}
-                />
-              </Tabs>
-            </Box>
-          </Box>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          marginY={-5}
-          sx={{ minHeight: "100vh", backgroundColor: "background.default" }}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            px: 2,
+            pt: 1,
+          }}
         >
+          <Box
+            component="img"
+            sx={{
+              height: "70px",
+              width: "80px",
+            }}
+            alt="CodeSync logo"
+            src="/logo1.png"
+          />
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <IconButton onClick={colorMode.toggleColorMode}>
+              {theme.palette.mode === "light" ? (
+                <DarkModeIcon sx={{ fontSize: 30 }} />
+              ) : (
+                <LightModeIcon sx={{ fontSize: 30 }} />
+              )}
+            </IconButton>
+            <Button
+              variant="contained"
+              startIcon={<LogoutIcon />}
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+            <Profile loggedInUser={auth} />
+          </Box>
+        </Box>
+
+        <Box sx={{ px: 2, backgroundColor: "background.paper" }}>
+          <Tabs
+            value={state.value}
+            onChange={(event, value) =>
+              dispatch({ type: "updateValue", payload: value })
+            }
+          >
+            <Tab
+              icon={<WorkspacesIcon />}
+              iconPosition="start"
+              label="Sessions"
+              sx={{ pb: 1, pt: 3 }}
+            />
+            <Tab
+              icon={<VideoCallIcon />}
+              iconPosition="start"
+              label="Interviews"
+              sx={{ pb: 1, pt: 3 }}
+            />
+            <Tab
+              icon={<SettingsIcon />}
+              iconPosition="start"
+              label="Settings"
+              sx={{ pb: 1, pt: 3 }}
+            />
+          </Tabs>
+        </Box>
+
+        <Box sx={{ px: 2, pb: 4 }}>
           <TabPanel value={state.value} index={0}>
             <UserSpaces
               setMessage={setMessage}
@@ -315,8 +291,8 @@ function Dashboard() {
           <TabPanel value={state.value} index={2}>
             <UserSettings loggedInUser={auth} setLoggedInUser={setAuth} />
           </TabPanel>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </>
   );
 }
