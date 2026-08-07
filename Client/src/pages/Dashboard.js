@@ -8,6 +8,7 @@ import {
   AlertTitle,
   Snackbar,
   IconButton,
+  Divider,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import WorkspacesIcon from "@mui/icons-material/Workspaces";
@@ -196,36 +197,58 @@ function Dashboard() {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "flex-start",
-            px: 2,
-            pt: 1,
+            alignItems: "center",
+            gap: 2,
+            px: { xs: 2, sm: 3 },
+            py: 1.5,
+            flexWrap: "wrap",
           }}
         >
           <Box
             component="img"
             sx={{
-              height: "70px",
-              width: "80px",
+              height: 56,
+              width: 64,
+              flexShrink: 0,
             }}
             alt="CodeSync logo"
             src="/logo1.png"
           />
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <IconButton onClick={colorMode.toggleColorMode}>
-              {theme.palette.mode === "light" ? (
-                <DarkModeIcon sx={{ fontSize: 30 }} />
-              ) : (
-                <LightModeIcon sx={{ fontSize: 30 }} />
-              )}
-            </IconButton>
-            <Button
-              variant="contained"
-              startIcon={<LogoutIcon />}
-              onClick={handleLogout}
-            >
-              Logout
-            </Button>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: { xs: 1, sm: 2 },
+              flexWrap: "wrap",
+              justifyContent: { xs: "flex-start", sm: "flex-end" },
+              flex: 1,
+              minWidth: 0,
+            }}
+          >
             <Profile loggedInUser={auth} />
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{ display: { xs: "none", sm: "block" }, height: 36, alignSelf: "center" }}
+            />
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+              <IconButton onClick={colorMode.toggleColorMode} size="large">
+                {theme.palette.mode === "light" ? (
+                  <DarkModeIcon />
+                ) : (
+                  <LightModeIcon />
+                )}
+              </IconButton>
+              <Button
+                variant="contained"
+                size="medium"
+                startIcon={<LogoutIcon />}
+                onClick={handleLogout}
+                sx={{ whiteSpace: "nowrap" }}
+              >
+                Logout
+              </Button>
+            </Box>
           </Box>
         </Box>
 

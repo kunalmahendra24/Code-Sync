@@ -1,39 +1,50 @@
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
+
+const getInitials = (name = "") =>
+  name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join("");
 
 export default function Profile({ loggedInUser }) {
+  const name = loggedInUser.user?.name || "User";
+  const email = loggedInUser.user?.email || "";
 
   return (
     <Box
       sx={{
-        minWidth: "20vw",
         display: "flex",
-        justifyContent: "center",
         alignItems: "center",
-        mb: 5,
+        gap: 1.5,
+        minWidth: 0,
+        maxWidth: { xs: "100%", sm: 280 },
       }}
     >
-    
-      <Box>
-        <Typography
-          variant="h1"
-          sx={{
-            fontSize: 20,
-            fontWeight: 700,
-            color: "text.primary",
-          }}
-        >
-        User -  {loggedInUser.user?.name}
+      <Avatar
+        sx={{
+          width: 40,
+          height: 40,
+          fontSize: 16,
+          fontWeight: 700,
+          bgcolor: "primary.main",
+          color: "primary.contrastText",
+        }}
+      >
+        {getInitials(name)}
+      </Avatar>
+      <Box sx={{ minWidth: 0 }}>
+        <Typography variant="subtitle2" fontWeight={600} noWrap>
+          {name}
         </Typography>
         <Typography
-          variant="h1"
-          sx={{
-            fontSize: 20,
-            fontWeight: 700,
-            mt: 1,
-            color: "text.primary",
-          }}
+          variant="caption"
+          color="text.secondary"
+          noWrap
+          sx={{ display: "block" }}
         >
-        E-Mail - {loggedInUser.user?.email}
+          {email}
         </Typography>
       </Box>
     </Box>
