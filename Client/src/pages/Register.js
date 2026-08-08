@@ -12,7 +12,7 @@ import {
 import LoadingButton from "@mui/lab/LoadingButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import axiosConfig from "../utils/axiosConfig";
+import axiosConfig, { getNetworkErrorMessage } from "../utils/axiosConfig";
 import isEmail from "validator/lib/isEmail";
 import useAuth from "../hooks/useAuth";
 import { ColorModeContext } from "../context/ColorModeContext";
@@ -58,7 +58,7 @@ function Register() {
       if (err?.response?.status === 400) {
         setMessage({ title: "Error!", data: err.response.data.error });
       } else {
-        setMessage({ title: "Error!", data: "No server response" });
+        setMessage({ title: "Error!", data: getNetworkErrorMessage(err) });
       }
       setError(true);
     } finally {

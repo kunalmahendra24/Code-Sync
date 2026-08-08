@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import LoginIcon from "@mui/icons-material/Login";
-import axiosConfig from "../utils/axiosConfig";
+import axiosConfig, { getNetworkErrorMessage } from "../utils/axiosConfig";
 import useAuth from "../hooks/useAuth";
 import isEmail from "validator/lib/isEmail";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -64,7 +64,7 @@ function Login() {
       } else {
         setMessage({
           title: "Error!",
-          data: err.message || "No server response",
+          data: getNetworkErrorMessage(err),
         });
       }
       setError(true);

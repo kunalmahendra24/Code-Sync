@@ -29,14 +29,17 @@ interviewRoomService
   .catch(console.log);
 
 const port = process.env.PORT || 5001;
+const host = process.env.HOST || "0.0.0.0";
 
 const corsOptions = {
   origin: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
 };
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors(corsOptions));
@@ -56,6 +59,10 @@ app.use(errorHandler);
 const server = http.createServer(app);
 const io = socketio(server, {
   cors: corsOptions,
+  transports: ["polling", "websocket"],
+  pingTimeout: 60000,
+  pingInterval: 25000,
+  allowEIO3: true,
 });
 
 setSocketIO(io);
@@ -179,8 +186,8 @@ io.on("connection", (socket) => {
 });
 
 if (!process.env.VERCEL) {
-  server.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+  server.listen(port, host, () => {
+    console.log(`Server listening on ${host}:${port}`);
   });
 }
 

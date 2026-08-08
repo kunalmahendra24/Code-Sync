@@ -2,7 +2,13 @@ const PRODUCTION_API =
   "https://code-sync-production-2882.up.railway.app";
 
 const isLocalHostname = (hostname) => {
-  if (!hostname || hostname === "localhost" || hostname === "127.0.0.1") {
+  if (!hostname) return false;
+
+  if (hostname.endsWith(".vercel.app") || hostname.endsWith(".railway.app")) {
+    return false;
+  }
+
+  if (hostname === "localhost" || hostname === "127.0.0.1") {
     return true;
   }
 

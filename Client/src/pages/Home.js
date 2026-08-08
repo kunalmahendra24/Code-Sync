@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LoadingButton from "@mui/lab/LoadingButton";
-import axiosConfig from "../utils/axiosConfig";
+import axiosConfig, { getNetworkErrorMessage } from "../utils/axiosConfig";
 import { saveSpaceSession } from "../utils/spaceSession";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -59,7 +59,7 @@ function Home() {
       if (err?.response?.status === 400) {
         setMessage({ title: "Error!", data: err.response.data.error });
       } else {
-        setMessage({ title: "Error!", data: "No server response" });
+        setMessage({ title: "Error!", data: getNetworkErrorMessage(err) });
       }
       setError(true);
     } finally {
