@@ -9,13 +9,6 @@ body {
   overflow: auto;
 }
 
-html,
-body,
-#root {
-  min-height: 100%;
-  min-height: 100dvh;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

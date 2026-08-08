@@ -98,8 +98,7 @@ function Home() {
       >
         <Box
           sx={{
-            minWidth: { xs: "85vw", sm: "50vw", md: "30vw" },
-            mx: { xs: 2, sm: 0 },
+            minWidth: "30vw",
             backgroundColor: "background.paper",
             borderRadius: 2,
             display: "flex",
