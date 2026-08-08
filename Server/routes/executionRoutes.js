@@ -9,6 +9,7 @@ router.get("/health", async (req, res) => {
   const dockerAvailable = await checkDockerAvailable();
   res.status(200).send({
     dockerAvailable,
+    executionMode: dockerAvailable ? "docker" : "native",
     supportedLanguages: SUPPORTED_LANGUAGES,
   });
 });

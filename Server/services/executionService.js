@@ -1,4 +1,5 @@
-const { executeInDocker } = require("../docker/dockerRunner");
+const { executeInDocker, checkDockerAvailable } = require("../docker/dockerRunner");
+const { executeNatively } = require("../docker/nativeRunner");
 const { SUPPORTED_LANGUAGES } = require("../docker/languageConfig");
 const interviewRoomService = require("./interviewRoomService");
 const { canExecuteCode } = require("../utils/permissions");
@@ -58,7 +59,10 @@ const runCode = async ({
     action,
   });
 
-  const result = await executeInDocker({
+  const dockerAvailable = await checkDockerAvailable();
+  const execute = dockerAvailable ? executeInDocker : executeNatively;
+
+  const result = await execute({
     language,
     code: sourceCode,
     stdin: stdin || "",
