@@ -58,7 +58,6 @@ export default function Editor({ spaceId, fillContainer = false }) {
   const state = useSelector((state) => state.spaceReducer);
   const { can, isInterview, isInterviewer } = useInterviewPermissions();
   const interview = useSelector((state) => state.spaceReducer.interview);
-  const [pos, setPos] = useState("1:1");
   const [codeChange, setCodeChange] = useState(null);
   const [editorHeight, setEditorHeight] = useState(300);
   const containerRef = useRef(null);
@@ -109,15 +108,6 @@ export default function Editor({ spaceId, fillContainer = false }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [codeChange]);
 
-  useEffect(() => {
-    dispatch({
-      type: "updateCursorPosition",
-      payload: pos,
-    });
-
-    // eslint-disable-next-line
-  }, [pos]);
-
   const codeMirrorHeight = fillContainer
     ? `${editorHeight}px`
     : "calc(100vh - 220px)";
@@ -166,9 +156,6 @@ export default function Editor({ spaceId, fillContainer = false }) {
           autoFocus={!isReadOnly}
           readOnly={isReadOnly}
           editable={!isReadOnly}
-          onStatistics={(data) => {
-            setPos(`${data.line.number}:${data.line.to - data.line.from + 1}`);
-          }}
           height={codeMirrorHeight}
           basicSetup={{
             lineNumbers: true,

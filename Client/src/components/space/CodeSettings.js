@@ -137,19 +137,6 @@ export default function CodeSettings() {
           alignItems: "center",
         }}
       >
-        <Typography
-          variant="h2"
-          sx={{
-            fontSize: 15,
-            fontWeight: 500,
-            color: "text.primary",
-            mr: 2,
-            opacity: 0.7,
-          }}
-        >
-          {state.cursorPosition}
-        </Typography>
-
         <SelectLanguage
           language={state.language}
           dispatch={dispatch}

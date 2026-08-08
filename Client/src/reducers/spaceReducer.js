@@ -9,7 +9,6 @@ const INITIAL_STATE = {
   message: { title: "", data: "" },
   language: "javascript",
   theme: "aura",
-  cursorPosition: "1:1",
   fontSize: 15,
   interview: null,
   userRole: null,
@@ -39,8 +38,6 @@ function spaceReducer(state = INITIAL_STATE, action) {
       return { ...state, language: action.payload };
     case "updateTheme":
       return { ...state, theme: action.payload };
-    case "updateCursorPosition":
-      return { ...state, cursorPosition: action.payload };
     case "updateFontSize":
       return { ...state, fontSize: action.payload };
     case "updateFileMetadata":
